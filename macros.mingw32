@@ -24,6 +24,7 @@
 %mingw32_host            %{mingw32_target}
 
 %mingw32_cflags          %{mingw32_cppflags} -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4
+%mingw32_fflags          %{mingw32_cflags}
 %mingw32_cppflags        %{nil}
 %mingw32_ldflags         %{nil}
 
@@ -36,6 +37,7 @@
 %mingw32_dlltool         %{mingw32_target}-dlltool
 %mingw32_dllwrap         %{mingw32_target}-dllwrap
 %mingw32_gcov            %{mingw32_target}-gcov
+%mingw32_gfortran        %{mingw32_target}-gfortran
 %mingw32_gprof           %{mingw32_target}-gprof
 %mingw32_ld              %{mingw32_target}-ld
 %mingw32_nm              %{mingw32_target}-nm
@@ -72,6 +74,13 @@
     CXX=; export CXX; \
     ac_cv_prog_CXX=no; export ac_cv_prog_CXX; \
     CXXFLAGS=; export CXXFLAGS; \
+  fi; \
+  if [ -x "%{_bindir}/%{mingw32_gfortran}" ]; then \
+    FFLAGS="${MINGW32_FFLAGS-%mingw32_fflags}"; export FFLAGS; \
+    FCFLAGS="${MINGW32_FCFLAGS-%mingw32_fflags}"; export FCFLAGS; \
+  else \
+    FFLAGS=; export FFLAGS; \
+    FCFLAGS=; export FCFLAGS; \
   fi; \
   LDFLAGS="${MINGW32_LDFLAGS:-%mingw32_ldflags}"; export LDFLAGS; \
   for i in `ls %{mingw32_bindir}/*|grep -- "-config\$"` ; do \

@@ -7,7 +7,7 @@
 
 Name:           mingw-filesystem
 Version:        101
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        MinGW cross compiler base filesystem and environment
 
 Group:          Development/Libraries
@@ -309,6 +309,9 @@ install -m 0644 %{SOURCE12} $RPM_BUILD_ROOT%{_datadir}/mingw/
 
 
 %changelog
+* Tue Feb 07 2017 Jajauma's Packages <jajauma@yandex.ru> - 101-2
+- Basic support for gfortran flags and such
+
 * Sun May  8 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 101-1
 - Update config.{guess,sub} in %%mingw_configure (#1288256)
 - Regenerated list of default win32 DLL's
